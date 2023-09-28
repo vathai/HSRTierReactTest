@@ -13,8 +13,9 @@ const RankItems = () => {
 
     return (
         <main>
-            (items != null) ? <div>
-            </div>
+            {
+                (items != null) ? items.map((item) => <h3>{ }</h3>)
+            }
         </main>
         )
 }
