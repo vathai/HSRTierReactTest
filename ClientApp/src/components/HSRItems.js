@@ -1,11 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
 
-const RankItems = () => {
+const HSRItems = () => {
     const [items, setItems] = useState([]);
-    const dataType = 1;
 
     useEffect(() => {
-        fetch(`item/${dataType}`).then((results) => {
+        fetch('/hsr-items').then((results) => {
             return results.json();
         }).then(data => { setItems(data); })
     }, [])
@@ -13,9 +12,10 @@ const RankItems = () => {
 
     return (
         <main>
-            {
-                (items != null) ? items.map((item) => <h3>{ }</h3>)
+            {   
+                (items != null) ? items.map((item) => <h3>{item.CharName}</h3>):<div>Loading...</div>
             }
         </main>
-        )
+    )
 }
+export { HSRItems };

@@ -8,6 +8,7 @@ namespace HSRTierReactTest.Controllers
     [Route("[controller]")]
     public class AttackerController : Controller
     {
+        [HttpGet]
         private static async Task<IResult> GetAttackers(IAttackerData data)
         {
             try

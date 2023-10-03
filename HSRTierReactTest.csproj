@@ -25,9 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="DamageCalcLibrary">
-      <HintPath>..\DamageCalcLibrary\bin\Debug\net6.0\DamageCalcLibrary.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\DamageCalcLibrary\DamageCalcLibrary.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
