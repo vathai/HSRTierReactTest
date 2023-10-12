@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using DamageCalcLibrary.Models;
-using DamageCalcLibrary.Data;
 
 namespace HSRTierReactTest.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AttackerController : Controller
+    public class AttackerController : ControllerBase
     {
         [HttpGet]
-        private static async Task<IResult> GetAttackers(IAttackerData data)
+        public static async Task<IResult> Get(IAttackerData data)
         {
+            Console.WriteLine("hit");
             try
             {
                 return Results.Ok(await data.GetAttackers());

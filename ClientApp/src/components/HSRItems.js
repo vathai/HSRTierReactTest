@@ -2,20 +2,25 @@
 
 const HSRItems = () => {
     const [items, setItems] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('/hsr-items').then((results) => {
-            return results.json();
-        }).then(data => { setItems(data); })
+        fetch('attacker')
+            .then((response) => response.json())
+            .then(data => {
+                setItems(data);
+                console.log(data);
+            })
     }, [])
 
 
     return (
         <main>
             {   
-                (items != null) ? items.map((item) => <h3>{item.CharName}</h3>):<div>Loading...</div>
+                /*(items != null) ? items.map((item) => <h3>{item.CharName}</h3>):<div>Loading...</div>*/
             }
         </main>
     )
+
 }
 export { HSRItems };

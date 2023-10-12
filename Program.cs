@@ -1,8 +1,13 @@
+using DamageCalcLibrary.DbAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddSingleton<IAttackerData, AttackerData>();
 
 var app = builder.Build();
 
