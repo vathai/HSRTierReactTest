@@ -7,9 +7,9 @@ namespace HSRTierReactTest.Controllers
     public class AttackerController : ControllerBase
     {
         [HttpGet]
-        public static async Task<IResult> Get(IAttackerData data)
+        //removing static makes method visable
+        public async Task<IResult> GetAttackers([FromServices] IAttackerData data)
         {
-            Console.WriteLine("hit");
             try
             {
                 return Results.Ok(await data.GetAttackers());

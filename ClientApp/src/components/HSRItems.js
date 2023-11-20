@@ -1,26 +1,27 @@
 ﻿import React, { useState, useEffect } from 'react';
 
 const HSRItems = () => {
-    const [items, setItems] = useState([]);
-    const [error, setError] = useState(null);
+    const [attackers, setAttackers] = useState([]);
 
     useEffect(() => {
-        fetch('attacker')
-            .then((response) => response.json())
-            .then(data => {
-                setItems(data);
-                console.log(data);
-            })
+        attackerFetch();
     }, [])
 
 
     return (
         <main>
             {   
-                /*(items != null) ? items.map((item) => <h3>{item.CharName}</h3>):<div>Loading...</div>*/
+                //returning json object with status code and value(array to extract)
+                console.log(attackers)
+                //(attackers != null) ? attackers.map((attacker) => <h3>{attacker.CharName}</h3>):<div>Loading...</div>
             }
         </main>
     )
 
+    async function attackerFetch() {
+        const response = await fetch('attacker');
+        const json = await response.json();
+        setAttackers(json);
+    }
 }
 export { HSRItems };
