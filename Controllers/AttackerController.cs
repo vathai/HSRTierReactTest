@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HSRTierReactTest.Controllers
 {
@@ -7,21 +9,27 @@ namespace HSRTierReactTest.Controllers
     public class AttackerController : ControllerBase
     {
         [HttpGet]
-        //removing static makes method visable
-        public async Task<IResult> GetAttackers([FromServices] IAttackerData data)
+        //removing static and making public makes method visable
+        public async Task<IEnumerable<Attacker>> GetAttackers([FromServices] IAttackerData data)
         {
-            try
+            return await data.GetAttackers();
+            /*try
             {
                 return Results.Ok(await data.GetAttackers());
             }
             catch (Exception ex)
             {
                 return Results.Problem(ex.Message);
-            }
+            }*/
         }
-        private static async Task<IResult> GetAttacker(int id, IAttackerData data)
+
+        [HttpGet("{id:int}")]
+        public async Task<Attacker?> GetAttacker(int id, [FromServices] IAttackerData data)
         {
-            try
+            var results = await data.GetAttacker(id);
+            if (results == null) return default;
+            return results;
+            /*try
             {
                 var results = await data.GetAttacker(id);
                 if (results == null) return Results.NotFound();
@@ -30,7 +38,7 @@ namespace HSRTierReactTest.Controllers
             catch (Exception ex)
             {
                 return Results.Problem(ex.Message);
-            }
+            }*/
         }
 
         private static async Task<IResult> InsertAttacker(Attacker attacker, IAttackerData data)
