@@ -12,7 +12,18 @@ const HSRItems = () => {
         <main>
             {
                 //was returning json object with status code and value(array to extract) with results.ok
-                (attackers != null) ? attackers.map((attacker, i) => <h3 key={i}>{attacker.charName}</h3>) : <div>Loading...</div>
+                (attackers != null) ? attackers.map((attacker, i) =>
+                    <>
+                        <h3 key={i}>{attacker.charName}</h3>
+                        <h1>Level: {attacker.charLevel}</h1>
+                        <p>Attack: {attacker.attack}</p>
+                        <p>Crit Damage: {attacker.critDamage}</p>
+                        <p>Break Effect: {attacker.breakEffect}</p>
+                        <p>Damage Boost: {attacker.damageBoost}</p>
+                        <p>Elemental Damage Boost: {attacker.elementalDmgBoost}</p>
+                        <button onClick={(e) => { this.editChar(e, attacker.id) }}>Edit</button>
+                    </>
+                ) : <div>Loading...</div>
             }
             <input id="charID"></input>
             <button onClick={getName}>submit</button>
@@ -24,7 +35,13 @@ const HSRItems = () => {
         const response = await fetch(`attacker/${id}`);
         const json = await response.json();
         //returns object, can't use .map
-        setAttackers(json);
+        //either return another component and setattackers to null or make object into array with 1 entry
+        setAttackers([json]);
+        console.log(attackers);
+    }
+
+    async function editChar(id) {
+
     }
 
     async function attackerFetch() {
